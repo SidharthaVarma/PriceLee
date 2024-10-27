@@ -10,9 +10,10 @@ import ProductCard from '@/components/ProductCard';
 import Modal from '@/components/Modal';
 
 type Props ={
-  params:{ id:string}
+  params:Promise<{ id:string}>
 }
-const ProductDetails = async ({ params: { id } }: Props) => {
+const ProductDetails = async (props: Props) => {
+  const { id } = await props.params;
   // getting the product details from the database
   const product :Product = await getProductById(id);
 
