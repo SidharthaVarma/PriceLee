@@ -44,12 +44,13 @@ export async function GET(){
                 // check each product status and send email
                 const emailNotifType = await getEmailNotifType(scrapedProduct,currentProduct);
 
-                if(emailNotifType && updatedProduct.users.length > 0){
-                    const productInfo ={
-                        title: updatedProduct.title,
-                        url: updatedProduct.url,
-                    }
-
+                if (emailNotifType && updatedProduct.users.length > 0) {
+                    const productInfo = {
+                      title: updatedProduct.title,
+                      url: updatedProduct.url,
+                      image: updatedProduct.image
+                    };
+                    // Construct emailContent
                     const emailContent = await generateEmailBody(productInfo, emailNotifType);
 
                     const userEmails = updatedProduct.users.map((user: any) => user.email);
