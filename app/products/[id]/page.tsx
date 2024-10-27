@@ -181,10 +181,10 @@
 
 // export default ProductDetails
 
-"use server"
+"use server";
 import { getProductById, getSimilarProducts } from '@/lib/actions';
 import { redirect } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
@@ -194,16 +194,17 @@ import ProductCard from '@/components/ProductCard';
 import Modal from '@/components/Modal';
 
 type Props = {
-  params: { id: string }
-}
+  params: {
+    id: string;
+  };
+};
 
 const ProductDetails = async ({ params }: Props) => {
-  const { id } = params; // No await here
-
-  // getting the product details from the database
+  const { id } = params;
+  
   const product: Product = await getProductById(id);
-
   const similarProducts = await getSimilarProducts(id);
+
   if (!product) redirect('/');
 
   return (
@@ -287,7 +288,7 @@ const ProductDetails = async ({ params }: Props) => {
                 </div>
               </div>
               <p className="text-sm text-black opacity-50">
-                <span className="text-primary-green font-semibold">93%</span> of buyers have recommended this.
+                <span className ="text-primary-green font-semibold">93%</span> of buyers have recommended this.
               </p>
             </div>
           </div>
@@ -320,9 +321,7 @@ const ProductDetails = async ({ params }: Props) => {
       </div>
       <div className="flex flex-col gap-16">
         <div className="flex flex-col gap-5">
-          <h3 className="text-2xl text-secondary font-semibold">
-            Product Description
-          </h3>
+          <h3 className="text-2xl text-secondary font-semibold">Product Description</h3>
           <div className="flex flex-col gap-4">
             {product?.description?.split('\n').map((line, index) => (
               <p key={index}>{line}</p>
@@ -341,19 +340,18 @@ const ProductDetails = async ({ params }: Props) => {
                 className="text-base text-white">Buy Now</Link>
         </button>
       </div>
-      {/* Check if similar products exist */}
       {similarProducts && similarProducts.length > 0 && (
         <div className="py-14 flex flex-col gap-2 w-full">
           <p className="section-text">Similar Products</p>
           <div className="flex flex-wrap gap-10 mt-7 w-full">
-            {similarProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
+            {similarProducts.map((similarProduct) => (
+              <ProductCard key={similarProduct._id} product={similarProduct} />
             ))}
           </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 export default ProductDetails;
