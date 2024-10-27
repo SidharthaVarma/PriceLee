@@ -13,8 +13,8 @@ import Modal from '@/components/Modal';
 type Props ={
   params:{ id:string}
 }
-const ProductDetails = async (props: Props) => {
-  const { id } = await props.params;
+const ProductDetails = async ({params:{id}}: Props) => {
+  // const { id } = await props.params;
   // getting the product details from the database
   const product :Product = await getProductById(id);
 
