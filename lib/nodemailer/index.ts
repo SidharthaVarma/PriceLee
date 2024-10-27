@@ -25,6 +25,7 @@ export async function generateEmailBody(
   let subject = "";
   let body = "";
 
+
   switch (type) {
     case Notification.WELCOME:
       subject = `Welcome to Price Tracking for ${shortenedTitle}`;
@@ -37,39 +38,44 @@ export async function generateEmailBody(
             <h3>${product.title} is back in stock!</h3>
             <p>We're excited to let you know that ${product.title} is now back in stock.</p>
             <p>Don't miss out - <a href="${product.url}" target="_blank" rel="noopener noreferrer">buy it now</a>!</p>
+            <img src="${product.image}" alt="Product Image" style="max-width: 100%;" />
+            Further updates will be sent to your inbox like this one.
             <img src="https://i.ibb.co/pwFBRMC/Screenshot-2023-09-26-at-1-47-50-AM.png" alt="Product Image" style="max-width: 100%;" />
           </div>
           <p>Stay tuned for more updates on ${product.title} and other products you're tracking.</p>
         </div>
       `;
       break;
-
+  
     case Notification.CHANGE_OF_STOCK:
       subject = `${shortenedTitle} is now back in stock!`;
       body = `
         <div>
           <h4>Hey, ${product.title} is now restocked! Grab yours before they run out again!</h4>
           <p>See the product <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a>.</p>
+          <img src="${product.image}" alt="Product Image" style="max-width: 100%;" />
         </div>
       `;
       break;
-
+  
     case Notification.LOWEST_PRICE:
       subject = `Lowest Price Alert for ${shortenedTitle}`;
       body = `
         <div>
           <h4>Hey, ${product.title} has reached its lowest price ever!!</h4>
           <p>Grab the product <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a> now.</p>
+          <img src="${product.image}" alt="Product Image" style="max-width: 100%;" />
         </div>
       `;
       break;
-
+  
     case Notification.THRESHOLD_MET:
       subject = `Discount Alert for ${shortenedTitle}`;
       body = `
         <div>
           <h4>Hey, ${product.title} is now available at a discount more than ${THRESHOLD_PERCENTAGE}%!</h4>
           <p>Grab it right away from <a href="${product.url}" target="_blank" rel="noopener noreferrer">here</a>.</p>
+          <img src="${product.image}" alt="Product Image" style="max-width: 100%;" />
         </div>
       `;
       break;
