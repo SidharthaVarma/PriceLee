@@ -1,4 +1,3 @@
-"use server"
 import { getProductById, getSimilarProducts } from '@/lib/actions';
 import { redirect } from 'next/navigation';
 import React from 'react'
