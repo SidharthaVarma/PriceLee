@@ -200,8 +200,9 @@ const ProductDetails = async ({ params }: Props) => {
   const { id } = params;
 
   // Fetch product details
-  const product: Product = await getProductById(id);
-  const similarProducts = await getSimilarProducts(id);
+  const product: Product | null = await getProductById(id);
+  const similarProducts: Product[] = (await getSimilarProducts(id)) ?? [];
+
 
   if (!product) redirect('/');
 
@@ -289,5 +290,6 @@ const ProductDetails = async ({ params }: Props) => {
 };
 
 export default ProductDetails;
+
 
 
